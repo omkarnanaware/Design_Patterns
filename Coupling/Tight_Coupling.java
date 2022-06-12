@@ -1,6 +1,6 @@
 //Author : Omkar Rajendra Nanaware;
-//Date and time : jun 13 00:38
-//Topic : Loose Coupling (Pre requisit of design Pattern)
+//Date and time : jun 13 01:10
+//Topic : Tight Coupling (Pre requisit of design Pattern)
 //Language : JAVA
 
 
@@ -16,16 +16,17 @@ class A
     private String strName;
     private B refB;                     //refB is referance of class B which is used as characteristic 
 
-    public A(int iValue, String strName, B refB)        //Dependency Injection
+    public A(int iValue, String strName)        //Dependency Injection
     {
         this.iNo1 = iValue;
         this.strName = strName;
-        this.refB = refB;               
+                    
     }
 
     public void PrintData()         //function of class A is able to use class B characteristic 
     {   
-        
+        this.refB = new B();
+        refB.setMarks();            //Dependency Injection Tight Coupling
     
         System.out.println("Printing marks of "+this.strName+" Roll no: "+this.iNo1);
 
@@ -72,25 +73,18 @@ class B
 
 }
 
-public class Loose_Coupling
-{
+
+public class Tight_Coupling {
     public static void main(String[] args) 
     {   
-
-        System.out.println("Loose Coupling");
-        System.out.println("creating a student with class A and creating object of class B seperatly and inserting in class A ");
+        System.out.println("Tight Coupling");
+        System.out.println("creating a student with class A and creating object of class B in class A ");
 
         System.out.println("Enter marks for 5 subject");
-
-        B marks = new B();
-        marks.setMarks();
         
-        A oOm = new A(1,"Om",marks);        //Dependency Injection
+        A oOm = new A(1,"Om");        
         oOm.PrintData();
 
 
     }
-
-
-
 }
